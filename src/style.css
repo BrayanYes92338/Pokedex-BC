@@ -1,0 +1,313 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  font-family: sans-serif;
+  padding: 90px 0;
+  background: #FFCC00;
+  position: relative;
+  min-height: 100vh;
+}
+
+.header {
+  background-color: #FFCC00;
+  height: 80px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 11;
+}
+
+
+
+.img {
+  width: 190px;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  max-width: 992px;
+  margin: 0 auto;
+}
+
+.nav-link {
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.nav-menu {
+  display: flex;
+  margin-right: 40px;
+  list-style: none;
+}
+
+.nav-menu-item {
+  font-size: 18px;
+  margin: 0 10px;
+  line-height: 80px;
+  text-transform: uppercase;
+  width: max-content;
+}
+
+.nav-menu-link {
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.nav-menu-link:hover {
+  background-color: #F6E394;
+  transition: 0.5s;
+
+}
+
+.nav-toggle {
+  color: white;
+  background: none;
+  border: none;
+  font-size: 30px;
+  padding: 0 20px;
+  cursor: pointer;
+  display: none;
+}
+
+
+
+.cgrupo-1 {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-around;
+
+}
+
+.slider-box {
+  position: relative;
+  width: 1250px;
+  height: auto;
+  margin: 30px auto 0;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.slider-box ul {
+  display: flex;
+  padding: 0;
+  width: 200%;
+  animation: slide 20s infinite linear;
+}
+
+.slider-box li {
+  width: 50%;
+  list-style: none;
+  position: relative;
+}
+
+@keyframes slide {
+  0% {
+    margin-left: 0;
+  }
+
+  25% {
+    margin-left: 0;
+  }
+
+  30% {
+    margin-left: -100%;
+  }
+
+  50% {
+    margin-left: -100%;
+  }
+
+  55% {
+    margin-left: -100%;
+  }
+
+  80% {
+    margin-left: -100%;
+  }
+
+  85% {
+    margin-left: 0;
+  }
+
+  100% {
+    margin-left: 0;
+  }
+}
+
+.prr1 {
+  font-size: 40px;
+  margin-top: 30px;
+
+}
+
+.btn-buscar {
+  background: #F33E33;
+  color: white;
+  border: none;
+  margin-top: 30px;
+  padding: 15px 45px;
+  font-size: 30px;
+  font-weight: bolder;
+  cursor: pointer;
+}
+
+
+.footer {
+  background-color: #363941;
+  color: white;
+  height: 80px;
+  bottom: 0;
+  padding: 30px 15px;
+  width: 100%;
+  position: absolute;
+}
+
+.copy {
+  text-align: center;
+  font-size: 20px;
+
+}
+
+.tipo_pokemon {
+  text-align: center;
+  color: white;
+
+}
+
+.cuerpo {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+
+}
+
+.primera_parte {
+  display: flex;
+
+
+}
+
+
+
+.pimagen {
+  position: relative;
+}
+
+.imagen-poke {
+  width: 450px;
+  position: absolute;
+  z-index: 10;
+}
+
+.id_poke {
+
+  opacity: 0.7;
+  font-size: 320px;
+  font-weight: bold;
+  position: relative;
+  left: 80px;
+  z-index: 8;
+}
+
+.poke_datos {
+  display: flex;
+  gap: 280px;
+  font-size: 30px;
+  margin-top: 10px;
+}
+
+.tipo_poke {
+  font-size: 30px;
+  margin-right: 200px;
+
+}
+
+.stats {
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+
+}
+
+.nombre_poke {
+  font-size: 80px;
+}
+
+.stats ul {
+  list-style-type: none;
+  font-size: 30px;
+}
+
+.stat-name {
+  margin-right: 40px;
+}
+
+.bar-progres {
+  margin-left: 30px;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+}
+
+.stats ul {
+
+  display: inline-block;
+}
+
+.stat-info {
+  margin-top: 30px;
+}
+
+.stats li {
+
+  display: inline-block;
+
+  margin-right: 50px;
+}
+
+.bar-progress {
+  margin-left: 10px;
+}
+
+.estadisticas {
+  font-size: 85px;
+  margin-top: 120px;
+}
+
+
+.busc {
+  width: 510px;
+  height: 70px;
+  border: none;
+  font-weight: bold;
+  font-size: 20px;
+  opacity: 0.5;
+  color: #767676;
+  text-indent: 30px;
+}
+
+.busc::placeholder {
+  text-align: center;
+}
+
+.lupa {
+  position: absolute;
+  cursor: pointer;
+  width: 70px;
+  height: 70px;
+  font-size: 24px;
+  opacity: 0.5;
+  background-color: white;
+  border: none;
+
+}
