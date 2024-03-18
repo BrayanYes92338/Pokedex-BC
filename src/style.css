@@ -195,7 +195,9 @@ body {
 
 }
 
-
+.datos{
+  margin-top: 70px;
+}
 
 .pimagen {
   position: relative;
