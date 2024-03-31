@@ -203,6 +203,24 @@ body {
   position: relative;
 }
 
+.fotopoke{
+  position: relative;
+  z-index: 9;
+  height: 400px;
+  width: 400px;
+  background-position: center;
+  background-size: cover;
+  left: 350px;
+top: 150px;
+}
+
+.logopoke {
+  position: relative;
+  height: 50px;
+  width: 50px;
+  background-position: center;
+  background-size: cover;
+}
 .imagen-poke {
   width: 450px;
   position: absolute;
@@ -210,8 +228,8 @@ body {
 }
 
 .id_poke {
-
-  opacity: 0.7;
+bottom: 255px;
+  opacity: 0.5;
   font-size: 320px;
   font-weight: bold;
   position: relative;

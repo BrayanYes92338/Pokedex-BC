@@ -5,16 +5,25 @@
       <input type="text" placeholder="Ingrese el ID o Nombre del Pokemon" class="busc" v-model="id">
       <button @click="traer()" class="lupa"><i class="fas fa-search"></i></button>
     </div>
-    <div class="cuerpo">
-
+    <div class="cuerpo" v-if="aparecer">
       <div class="datos">
         <div class="primera_parte">
           <div class="otros_datos">
             <p class="tipo_poke">
               <span v-for="(typeData, index) in pokemon.types" :key="index">
-                {{ index === 0 ? typeData.type.name.charAt(0).toUpperCase() + typeData.type.name.slice(1) :
-                  typeData.type.name.charAt(0).toUpperCase() + typeData.type.name.slice(1) }}
-                <span v-if="index !== pokemon.types.length - 1 && index !== 0">,</span>
+                <img :src="getTipoImagen(typeData.type.name)" alt="">
+                <span :style="{
+                  background: typeStyles[typeData.type.name].bgColor,
+                  padding: '8px 10px',
+                  borderRadius: '20px',
+                  fontWeight: 'bold',
+                  border: '1px solid #A3A7A8'
+                }">
+
+                  {{ index === 0 ? typeData.type.name.charAt(0).toUpperCase() + typeData.type.name.slice(1) :
+                    ' ' + typeData.type.name.charAt(0).toUpperCase() + typeData.type.name.slice(1) }}
+                </span>
+                <template v-if="index !== pokemon.types.length - 1">&nbsp;</template>
               </span>
             </p>
             <h2 class="nombre_poke"><strong>{{ pokemon.name ? pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)
@@ -29,9 +38,11 @@
             </div>
           </div>
           <div class="pimagen">
-            <img class="imagen-poke" v-if="pokemon.sprites && pokemon.sprites.front_default"
-              :src="pokemon.sprites.front_default" :alt="pokemon.name">
-            <h1 class="id_poke">#{{ pokemon && pokemon.id ? pokemon.id.toString().padStart(3, '0').slice(-3) : '' }}</h1>
+            <div class="fotopoke"
+              :style="{ 'background-image': 'url(' + pokemon.sprites?.other['official-artwork'].front_default + ')' }">
+            </div>
+            <h1 class="id_poke">#{{ pokemon && pokemon.id ? (pokemon.id < 1000 ? pokemon.id.toString().padStart(3, '0') :
+              pokemon.id) : '' }}</h1>
 
           </div>
         </div>
@@ -51,26 +62,91 @@
           </li>
         </ul>
       </div>
-
     </div>
   </div>
 </template>
   
 <script setup>
-import { ref } from "vue"
-import axios from "axios"
+import { ref } from 'vue';
+import axios from 'axios';
 
-let pokemon = ref([]);
-let id = ref("")
+const pokemon = ref({});
+const id = ref('');
+const aparecer = ref(false);
+
+const imagenes = [
+  '../img/Png/Tipo Normal.png',
+  '../img/Png/Tipo Lucha.png',
+  '../img/Png/Tipo Volador.png',
+  '../img/Png/Tipo Veneno.png',
+  '../img/Png/Tipo Tierra.png',
+  '../img/Png/Tipo Roca.png',
+  '../img/Png/Tipo Bicho.png',
+  '../img/Png/Tipo Fantasma.png',
+  '../img/Png/Tipo Acero.png',
+  '../img/Png/Tipo Fuego.png',
+  '../img/Png/Tipo Agua.png',
+  '../img/Png/Tipo Planta.png',
+  '../img/Png/Tipo Eléctrico.png',
+  '../img/Png/Tipo Psíquico.png',
+  '../img/Png/Tipo Hielo.png',
+  '../img/Png/Tipo Dragón.png',
+  '../img/Png/Tipo Siniestro.png',
+  '../img/Png/Tipo Hada.png'
+];
+
+function getTipoImagen(tipo) {
+  let imagen;
+  switch (tipo) {
+    case 'water':
+      imagen = '../img/Png/Tipo Agua.png';
+      break;
+    case 'fighting':
+      imagen = '../img/Png/Tipo Lucha.png';
+      break;
+    // Agrega más casos según sea necesario para otros tipos
+    default:
+      imagen = ''; // Si no hay una imagen específica para el tipo, deja el src vacío
+  }
+  return imagen;
+}
+
+const typeStyles = {
+  normal: { bgColor: '#705358' },
+  fighting: { bgColor: '#993E23' },
+  flying: { bgColor: '#44677A' },
+  poison: { bgColor: '#5A2E87' },
+  ground: { bgColor: '#A5702C' },
+  rock: { bgColor: '#471909' },
+  bug: { bgColor: '#127836' },
+  ghost: { bgColor: '#30336A' },
+  steel: { bgColor: '#5C716A' },
+  fire: { bgColor: '#AA1F22' },
+  water: { bgColor: '#1153DF' },
+  grass: { bgColor: '#127836' },
+  electric: { bgColor: '#E1E326' },
+  psychic: { bgColor: '#A42A67' },
+  ice: { bgColor: ' #85D2F0' },
+  dragon: { bgColor: '#448A92' },
+  dark: { bgColor: '#050704' },
+  fairy: { bgColor: '#941B44' },
+};
 
 async function traer() {
   try {
-    let datos = await axios.get("https://pokeapi.co/api/v2/pokemon/" + id.value)
-    pokemon.value = datos.data
+    const datos = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id.value}`);
+    pokemon.value = datos.data;
+    aparecer.value = true;
     console.log(datos.data);
   } catch (error) {
     console.log(error);
   }
+  limpiar();
 }
 
+
+
+function limpiar() {
+  id.value = '';
+}
 </script>
