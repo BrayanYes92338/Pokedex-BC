@@ -98,18 +98,18 @@ const buscar = async () => {
 
         pokemonImage.value = pokemonData.sprites.other['official-artwork'].front_default
 
-        const names = await generadordenombres(numero - 1)
-        pokemonNames.value = [pokemonData.name, ...names]
+        const pokemonName = pokemonData.name;
+        const names = await generadordenombres(numero - 1, pokemonName);
+        pokemonNames.value = [pokemonName, ...names]
         pokemon.value = pokemonData
 
         cambiodeposicion();
     } catch (error) {
         console.log(error)
-
     }
 }
 
-const generadordenombres = async (count) => {
+const generadordenombres = async (count, correctName) => {
     const names = []
     try {
         for (let i = 0; i < count; i++) {
@@ -117,13 +117,16 @@ const generadordenombres = async (count) => {
             const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`)
             const pokemonData = response.data
             const name = pokemonData.name
-            names.push(name)
+            if (name !== correctName) {
+                names.push(name)
+            }
         }
     } catch (error) {
         console.log(error)
     }
-    return names
+    return names.map(name => name.replace(/-/g, ' '));
 }
+
 
 const tipodeestilo = {
     normal: { bgColor: '#705358' },
