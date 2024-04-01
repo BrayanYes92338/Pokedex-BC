@@ -19,7 +19,6 @@
                   fontWeight: 'bold',
                   border: '1px solid #A3A7A8'
                 }">
-
                   {{ index === 0 ? typeData.type.name.charAt(0).toUpperCase() + typeData.type.name.slice(1) :
                     ' ' + typeData.type.name.charAt(0).toUpperCase() + typeData.type.name.slice(1) }}
                 </span>
@@ -104,9 +103,9 @@ function getTipoImagen(tipo) {
     case 'fighting':
       imagen = '../img/Png/Tipo Lucha.png';
       break;
-    // Agrega más casos según sea necesario para otros tipos
+
     default:
-      imagen = ''; // Si no hay una imagen específica para el tipo, deja el src vacío
+      imagen = '';
   }
   return imagen;
 }
