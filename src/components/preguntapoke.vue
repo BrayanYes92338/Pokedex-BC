@@ -1,12 +1,41 @@
 <template>
     <div class="contenedor-adivinar-pokemon">
-        <button class="btn-jugar" @click="start" :disabled="isRunning || currentTime === 0">JUGAR</button>
-        <div class="cont-pokemon">
+        <div class="imagen-carga" v-if="aparecerpantalla">
+            <div class="grupo2">
+                <div class="slider-box2">
+                    <ul>
+                        <li>
+                            <img class="silueta" src="../img/silueta 1.png" alt="">
+
+                        </li>
+                        <li>
+                            <img class="silueta" src="../img/silueta 2.png" alt="">
+                        </li>
+                    </ul>
+                </div>
+                <div class="prr2">
+                    <h2>Adivina al <strong>Pokémon</strong> </h2>
+                    <h2 class="prr1">¡Ponte a prueba y trata de adivinar al <strong>Pokémon</strong> favorito en nuestra
+                        Pokédex!</h2>
+                    <h2 class="prr1">¡Veamos si puedes descubrirlo!</h2>
+
+                    <button class="btn-jugar" @click="start" :disabled="isRunning || currentTime === 0">JUGAR</button>
+                </div>
+            </div>
+            <img class="loading-image" src="../img/Fondo Adivina Poke.png" alt="">
+        </div>
+        <div class="cont-pokemon" v-if="aparecerpokemon">
             <div class="div_pk">
                 <div class="imagenpokemon" :style="{ 'background-image': 'url(' + pokemonImage + ')' }"></div>
             </div>
-            <div class="contador">
-                <h3 class="num-contador" :class="{ 'red-text': currentTime <= 10 }">{{ formattedTime }}</h3>
+            <div class="objetos">
+                <div class="contador">
+                    <h3 class="num-contador" :class="{ 'red-text': currentTime <= 10 }">{{ formattedTime }}</h3>
+                </div>
+                <div class="contador_intentos">
+                    <h3 class="num-contador" :class="{ 'red-text': intentos <= 1 }">Intentos: {{ intentos }}</h3>
+                </div>
+                <button class="btn-jugar2" @click="restart" :disabled="currentTime !== 0">Volver a Jugar</button>
             </div>
             <p class="tipos_poke">
                 <span v-for="(typeData, index) in pokemon.types" :key="index">
@@ -23,6 +52,7 @@
                     <template v-if="index !== pokemon.types.length - 1">&nbsp;</template>
                 </span>
             </p>
+
             <h2>¿Quién es este Pokémon?</h2>
             <div class="nombres-pokemon">
                 <button class="contenedor-poke" v-for="(name, index) in pokemonNames" :key="index"
@@ -30,7 +60,7 @@
                     {{ name }}
                 </button>
             </div>
-            <button class="btn-jugar2" @click="restart" :disabled="currentTime !== 0">Volver a Jugar</button>
+            
         </div>
     </div>
 </template>
@@ -48,8 +78,12 @@ const puntos = ref(0)
 const pokemonNames = ref([])
 const numero = 4
 const pokemon = ref({})
-const aparecerpokemon = ref(false)
 const volverajugar = ref(false)
+const elemento = ref('');
+const botonesPresionados = ref(Array(pokemonNames.value.length).fill(false));
+const aparecerpokemon = ref(false)
+const aparecerpantalla = ref(true)
+
 const start = () => {
     if (!isRunning.value) {
         isRunning.value = true;
@@ -66,12 +100,23 @@ const start = () => {
             }
         }, 1000);
     }
+
+    aparecerpokemon.value = true
+    aparecerpantalla.value = false
+
+    pokemonNames.value.forEach((name, i) => {
+        document.querySelectorAll(".contenedor-poke")[i].disabled = false;
+    });
+
+
 };
 
 const stop = () => {
     isRunning.value = false
     clearInterval(intervalId)
 }
+
+
 
 const restart = () => {
     currentTime.value = totalTime
@@ -81,7 +126,9 @@ const restart = () => {
     const pokemonImageElement = document.querySelector(".imagenpokemon");
     if (pokemonImageElement) {
         pokemonImageElement.style.filter = "brightness(0)";
+
     }
+    intentos.value = totalintentos;
 
 }
 
@@ -103,11 +150,21 @@ const buscar = async () => {
         pokemonNames.value = [pokemonName, ...names]
         pokemon.value = pokemonData
 
+        const tipoPokemon = pokemonData.types[0].type.name;
+        const matchingType = tipopoke.find(pokemon => pokemon.type === tipoPokemon);
+        if (matchingType) {
+
+            elemento.value = matchingType.img;
+            console.log(elemento.value);
+        }
+
         cambiodeposicion();
     } catch (error) {
         console.log(error)
     }
 }
+
+
 
 const generadordenombres = async (count, correctName) => {
     const names = []
@@ -127,6 +184,39 @@ const generadordenombres = async (count, correctName) => {
     return names.map(name => name.replace(/-/g, ' '));
 }
 
+
+let tipopoke = [
+    { img: '../img/Png/Normal.png', type: 'normal' },
+    { img: '../img/Png/Lucha.png', type: 'fighting' },
+    { img: '../img/Png/Volador.png', type: 'flying' },
+    { img: '../img/Png/Veneno.png', type: 'poison' },
+    { img: '../img/Png/Tierra.png', type: 'ground' },
+    { img: '../img/Png/Roca.png', type: 'rock' },
+    { img: '../img/Png/Bicho.png', type: 'bug' },
+    { img: '../img/Png/Fantasma.png', type: 'ghost' },
+    { img: '../img/Png/Acero.png', type: 'steel' },
+    { img: '../img/Png/Fuego.png', type: 'fire' },
+    { img: '../img/Png/Agua.png', type: 'water' },
+    { img: '../img/Png/Planta.png', type: 'grass' },
+    { img: '../img/Png/Electrico.png', type: 'electric' },
+    { img: '../img/Png/Psiquico.png', type: 'psychic' },
+    { img: '../img/Png/Hielo.png', type: 'ice' },
+    { img: '../img/Png/Dragon.png', type: 'dragon' },
+    { img: '../img/Png/Siniestro.png', type: 'dark' },
+    { img: '../img/Png/Hada.png', type: 'fairy' }
+]
+
+
+function obtenerImagenPokemon(tipoPokemon) {
+    const tipoPokemonEncontrado = tipopoke.find(pokemon => pokemon.type === tipoPokemon);
+
+    if (tipoPokemonEncontrado) {
+        return tipoPokemonEncontrado.img;
+    }
+
+
+    return '';
+}
 
 const tipodeestilo = {
     normal: { bgColor: '#705358' },
@@ -149,21 +239,38 @@ const tipodeestilo = {
     fairy: { bgColor: '#941B44' },
 }
 
-const seleccionPokemon = async (index) => {
+const totalintentos = 3;
+const intentos = ref(totalintentos);
 
-    
+const seleccionPokemon = async (index) => {
     if (pokemonNames.value[index] === pokemon.value.name) {
         currentTime.value = 0;
         console.log('¡Correcto! Ese es el Pokémon correcto.');
         const pokemonImageUrl = pokemonImage.value;
         pokemonImage.value = pokemonImageUrl;
-        volverajugar.value = true; 
+        volverajugar.value = true;
         document.querySelector(".imagenpokemon").style.filter = "brightness(1.0)";
+        
+        
+        pokemonNames.value.forEach((name, i) => {
+            document.querySelectorAll(".contenedor-poke")[i].disabled = true;
+        });
     } else {
         console.log('¡Incorrecto! Ese no es el Pokémon correcto.');
         start();
+        intentos.value--;
+
+        if (intentos.value === 0) {
+            currentTime.value = 0;
+            document.querySelector(".imagenpokemon").style.filter = "brightness(1.0)";
+            volverajugar.value = true;
+         
+            pokemonNames.value.forEach((name, i) => {
+                document.querySelectorAll(".contenedor-poke")[i].disabled = true;
+            });
+        }
     }
-}
+};
 
 
 
