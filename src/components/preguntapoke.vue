@@ -2,17 +2,8 @@
     <div class="contenedor-adivinar-pokemon">
         <div class="imagen-carga" v-if="aparecerpantalla">
             <div class="grupo2">
-                <div class="slider-box2">
-                    <ul>
-                        <li>
-                            <img class="silueta" src="../img/silueta 1.png" alt="">
-
-                        </li>
-                        <li>
-                            <img class="silueta" src="../img/silueta 2.png" alt="">
-                        </li>
-                    </ul>
-                </div>
+                <img class="silueta" src="../img/silueta 1.png" alt="">
+               
                 <div class="prr2">
                     <h2>Adivina al <strong>Pokémon</strong> </h2>
                     <h2 class="prr1">¡Ponte a prueba y trata de adivinar al <strong>Pokémon</strong> favorito en nuestra
