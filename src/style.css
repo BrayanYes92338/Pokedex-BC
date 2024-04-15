@@ -295,14 +295,10 @@ body {
   display: inline-block;
 }
 
-.stat-info {
-  margin-top: 30px;
-}
+
 
 .stats li {
-
   display: inline-block;
-
   margin-right: 50px;
 }
 
@@ -405,8 +401,7 @@ body {
 .nombres-pokemon {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  margin-top: 30px;
-  gap: 30px;
+  gap: 15px;
   justify-content: center;
 }
 
@@ -513,18 +508,18 @@ body {
 
 @media(max-width: 1366px) {
   .loading-image {
-    width: 1150px;
+    width: 1050px;
   }
 
   .prr1 {
-    font-size: 35px;
+    font-size: 25px;
   }
 
   .btn-jugar {
     font-size: 40px;
     padding: 10px 25px;
     position: absolute;
-    left: 900px;
+    left: 800px;
 
   }
 
@@ -543,16 +538,16 @@ body {
   .div_pk {
     border: 10px solid white;
     border-radius: 20px;
-    width: 250px;
-    height: 250px;
+    width: 220px;
+    height: 220px;
     background-color: rgba(228, 228, 228, 0.3);
     margin-top: 40px;
 
   }
 
   .imagenpokemon {
-    height: 220px;
-    width: 220px;
+    height: 190px;
+    width: 190px;
     background-position: center;
     background-size: cover;
 
@@ -560,29 +555,29 @@ body {
 
   .contenedor-poke {
 
-    width: 530px;
-    height: 90px;
-
+    width: 430px;
+    height: 70px;
+font-size: 30px ;
   }
 
   .contador {
-    width: 110px;
-    height: 110px;
+    width: 80px;
+    height: 80px;
 
 
   }
 
   .num-contador {
-    font-size: 40px;
+    font-size: 30px;
     font-weight: bold;
     text-align: center;
-    line-height: 100px;
+    line-height: 90px;
   }
 
   .btn-jugar2 {
 
     font-size: 20px;
-    padding: 10px 20px;
+    padding: 10px 15px;
     border-radius: 20px;
     cursor: pointer;
     font-weight: bolder;
@@ -596,6 +591,13 @@ body {
     margin-bottom: 90px;
   }
 
+ 
+
+
+.stats ul {
+  list-style-type: none;
+  font-size: 25px;
+}
 
   .stats li {
     display: inline-block;
@@ -603,8 +605,8 @@ body {
   }
 
   .estadisticas {
-    font-size: 65px;
-    margin-top: 120px;
+    font-size: 55px;
+    margin-top: 90px;
   }
 
   .id_poke {
@@ -625,7 +627,12 @@ body {
     background-position: center;
     background-size: cover;
     left: 350px;
-    top: 150px;
+    top: 70px;
   }
+
+  .titulopoke{
+font-size: 50px;
+  }
+
 
 }

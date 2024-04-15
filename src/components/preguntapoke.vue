@@ -44,7 +44,7 @@
                 </span>
             </p>
 
-            <h2>¿Quién es este Pokémon?</h2>
+            <h2 class="titulopoke">¿Quién es este Pokémon?</h2>
             <div class="nombres-pokemon">
                 <button class="contenedor-poke" v-for="(name, index) in pokemonNames" :key="index"
                     @click="seleccionPokemon(index)">
