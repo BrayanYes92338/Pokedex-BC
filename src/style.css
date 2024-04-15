@@ -506,6 +506,13 @@ body {
 
 }
 
+@media(max-width: 1423px){
+  .stats li {
+    display: inline-block;
+    margin-right: 30px;
+  }
+}
+
 @media(max-width: 1366px) {
   .loading-image {
     width: 1050px;

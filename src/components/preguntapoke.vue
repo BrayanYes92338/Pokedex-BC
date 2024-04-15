@@ -17,7 +17,8 @@
         </div>
         <div class="cont-pokemon" v-if="aparecerpokemon">
             <div class="div_pk">
-                <div class="imagenpokemon" :style="{ 'background-image': 'url(' + pokemonImage + ')' }"></div>
+                <div class="imagenpokemon" :style="{ 'background-image': 'url(' + pokemon.sprites?.other['official-artwork'].front_default + ')' }"></div>
+
             </div>
             <div class="objetos">
                 <div class="contador">
@@ -46,10 +47,10 @@
 
             <h2 class="titulopoke">¿Quién es este Pokémon?</h2>
             <div class="nombres-pokemon">
-                <button class="contenedor-poke" v-for="(name, index) in pokemonNames" :key="index"
-                    @click="seleccionPokemon(index)">
-                    {{ name }}
-                </button>
+                  <button class="contenedor-poke" v-for="(name, index) in pokemonNames" :key="index"
+                @click="seleccionPokemon(index)" :style="{ 'background-color': getButtonColor(name) }">
+                {{ name }}
+            </button>
             </div>
             
         </div>
@@ -57,9 +58,9 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed,onMounted } from 'vue'
 import axios from 'axios'
-
+import Swal from 'sweetalert2';
 const totalTime = 30
 const currentTime = ref(totalTime)
 const isRunning = ref(false)
@@ -71,7 +72,6 @@ const numero = 4
 const pokemon = ref({})
 const volverajugar = ref(false)
 const elemento = ref('');
-const botonesPresionados = ref(Array(pokemonNames.value.length).fill(false));
 const aparecerpokemon = ref(false)
 const aparecerpantalla = ref(true)
 
@@ -236,17 +236,28 @@ const intentos = ref(totalintentos);
 const seleccionPokemon = async (index) => {
     if (pokemonNames.value[index] === pokemon.value.name) {
         currentTime.value = 0;
+        Swal.fire({
+            title: '¡Correcto!',
+            text: '¡Ese es el Pokémon correcto!',
+            icon: 'success',
+            confirmButtonText: '¡Genial!'
+        })
         console.log('¡Correcto! Ese es el Pokémon correcto.');
         const pokemonImageUrl = pokemonImage.value;
         pokemonImage.value = pokemonImageUrl;
         volverajugar.value = true;
         document.querySelector(".imagenpokemon").style.filter = "brightness(1.0)";
         
-        
         pokemonNames.value.forEach((name, i) => {
             document.querySelectorAll(".contenedor-poke")[i].disabled = true;
         });
     } else {
+        Swal.fire({
+            title: '¡Incorrecto!',
+            text: '¡Ese no es el Pokémon correcto!',
+            icon: 'error',
+            confirmButtonText: '¡Volver a intentar!'
+        })
         console.log('¡Incorrecto! Ese no es el Pokémon correcto.');
         start();
         intentos.value--;
@@ -273,4 +284,17 @@ const cambiodeposicion = () => {
         pokemonNames.value[randomIndex] = temp
     }
 }
+
+const getButtonColor = (name) => {
+    if (currentTime.value === 0 && name === pokemon.value.name) {
+        return 'green';
+    } else if (intentos.value === 0 && name === pokemon.value.name) {
+        return 'red'; 
+    } else if (intentos.value === 0 && name !== pokemon.value.name) {
+        return 'red'; 
+    } else {
+        return ''; 
+    }
+};
 </script>
+

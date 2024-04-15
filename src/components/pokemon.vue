@@ -37,8 +37,7 @@
             </div>
           </div>
           <div class="pimagen">
-            <div class="fotopoke"
-              :style="{ 'background-image': 'url(' + pokemon.sprites?.other['official-artwork'].front_default + ')' }">
+            <div class="fotopoke" :style="{ 'background-image': 'url(' + pokemon.sprites?.other['official-artwork'].front_default + ')' }">
             </div>
             <h1 class="id_poke">#{{ pokemon && pokemon.id ? (pokemon.id < 1000 ? pokemon.id.toString().padStart(3, '0') :
               pokemon.id) : '' }}</h1>
