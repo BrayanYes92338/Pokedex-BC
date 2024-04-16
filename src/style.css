@@ -206,6 +206,7 @@ body {
 
 .pimagen {
   position: relative;
+height: 300px;
 }
 
 .fotopoke {
@@ -265,8 +266,8 @@ body {
 .stats {
   display: flex;
   justify-content: space-between;
-  gap: 50px;
-
+  gap: 40px;
+  margin-bottom: 500px;
 }
 
 .nombre_poke {
@@ -280,15 +281,19 @@ body {
 
 .stat-name {
   margin-right: 40px;
+  font-size: 20px;
+
 }
 
 .bar-progres {
   margin-left: 30px;
+  font-size: 20px;
 }
 
 .stat-item {
   display: flex;
   align-items: center;
+
 }
 
 .stats ul {
@@ -515,19 +520,19 @@ body {
 
 @media(max-width: 1366px) {
   .loading-image {
-    width: 1050px;
+    width: 980px;
   }
 
   .prr1 {
-    font-size: 25px;
+    font-size: 20px;
   }
 
   .btn-jugar {
-    font-size: 40px;
-    padding: 10px 25px;
+    font-size: 30px;
+    padding: 10px 19px;
     position: absolute;
     left: 800px;
-
+    top: 420px;
   }
 
   .objetos {
@@ -562,8 +567,8 @@ body {
 
   .contenedor-poke {
 
-    width: 430px;
-    height: 70px;
+    width: 410px;
+    height: 60px;
 font-size: 30px ;
   }
 
@@ -617,9 +622,9 @@ font-size: 30px ;
   }
 
   .id_poke {
-    bottom: 225px;
+    bottom: 245px;
     opacity: 0.5;
-    font-size: 270px;
+    font-size: 230px;
     font-weight: bold;
     position: relative;
     left: 80px;
@@ -634,7 +639,7 @@ font-size: 30px ;
     background-position: center;
     background-size: cover;
     left: 350px;
-    top: 70px;
+    top: 50px;
   }
 
   .titulopoke{
